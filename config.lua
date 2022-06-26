@@ -1,7 +1,7 @@
 -- General
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "material"
+lvim.colorscheme = "dracula"
 lvim.leader = "space"
 
 -- Keymapping
@@ -64,6 +64,7 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
   { "marko-cerovac/material.nvim" },
+  { "Mofiqul/dracula.nvim" },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -116,5 +117,4 @@ lvim.plugins = {
   { "editorconfig/editorconfig-vim" }
 }
 
-vim.cmd "colorscheme material"
-vim.g.material_style = "palenight"
+vim.cmd [[colorscheme dracula]]
