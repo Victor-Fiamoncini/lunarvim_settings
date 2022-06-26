@@ -1,13 +1,14 @@
 -- General
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "material"
 lvim.leader = "space"
 
 -- Keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Builtin Plugins
+vim.opt.timeoutlen                                          = 500
 lvim.builtin.alpha.active                                   = true
 lvim.builtin.alpha.mode                                     = "dashboard"
 lvim.builtin.notify.active                                  = true
@@ -47,7 +48,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    command = "eslint",
+    command = "eslint_d",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   },
 }
@@ -55,26 +56,27 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    command = "eslint",
+    command = "eslint_d",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   }
 }
 
 -- Additional Plugins
 lvim.plugins = {
-  { "folke/tokyonight.nvim" },
+  { "marko-cerovac/material.nvim" },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
   {
-    'wfxr/minimap.vim',
+    "wfxr/minimap.vim",
     run = "cargo install --locked code-minimap",
     cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
     config = function()
       vim.cmd("let g:minimap_width = 10")
       vim.cmd("let g:minimap_auto_start = 1")
       vim.cmd("let g:minimap_auto_start_win_enter = 1")
+      vim.cmd("let g:minimap_git_colors = 1")
     end,
   },
   {
@@ -111,4 +113,8 @@ lvim.plugins = {
       })
     end
   },
+  { "editorconfig/editorconfig-vim" }
 }
+
+vim.cmd "colorscheme material"
+vim.g.material_style = "palenight"
