@@ -1,14 +1,16 @@
 -- General
-lvim.log.level = "warn"
+vim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "dracula"
+lvim.colorscheme = "material"
 lvim.leader = "space"
+
+-- Default Options
+vim.opt.timeoutlen = 500
 
 -- Keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Builtin Plugins
-vim.opt.timeoutlen                                          = 500
 lvim.builtin.alpha.active                                   = true
 lvim.builtin.alpha.mode                                     = "dashboard"
 lvim.builtin.notify.active                                  = true
@@ -38,7 +40,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "ruby",
   "java",
-  "yaml",
+  "yaml"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -49,22 +51,37 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
     command = "prettier",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   },
+  {
+    exe = "yapf",
+    filetypes = { "python" }
+  }
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    command = "eslint_d",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    command = "eslint",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+  },
+  {
+    exe = "flake8",
+    filetypes = { "python" }
   }
+}
+
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    exe = "eslint_d",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
+  },
 }
 
 -- Additional Plugins
 lvim.plugins = {
   { "marko-cerovac/material.nvim" },
-  { "Mofiqul/dracula.nvim" },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -114,7 +131,14 @@ lvim.plugins = {
       })
     end
   },
-  { "editorconfig/editorconfig-vim" }
+  {
+    "editorconfig/editorconfig-vim",
+    config = function()
+      vim.cmd("let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'")
+      vim.cmd("let g:EditorConfig_core_mode = 'external_command'")
+    end
+  }
 }
 
-vim.cmd [[colorscheme dracula]]
+vim.cmd "colorscheme material"
+vim.g.material_style = "palenight"
