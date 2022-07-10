@@ -22,7 +22,7 @@ lvim.builtin.nvimtree.setup.open_on_tab                     = true
 lvim.builtin.nvimtree.setup.open_on_setup_file              = true
 lvim.builtin.nvimtree.setup.filters.dotfiles                = false
 lvim.builtin.nvimtree.setup.view.width                      = 40
-lvim.builtin.nvimtree.setup.view.hide_root_folder           = true
+lvim.builtin.nvimtree.setup.view.hide_root_folder           = false
 lvim.builtin.nvimtree.setup.sort_by                         = "case_sensitive"
 lvim.builtin.nvimtree.setup.view.auto_resize                = false
 lvim.builtin.nvimtree.setup.actions.open_file.resize_window = true
@@ -54,7 +54,7 @@ formatters.setup {
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   },
   {
-    exe = "yapf",
+    exe = "black",
     filetypes = { "python" }
   }
 }
@@ -65,10 +65,6 @@ linters.setup {
     command = "eslint",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   },
-  {
-    exe = "flake8",
-    filetypes = { "python" }
-  }
 }
 
 local code_actions = require "lvim.lsp.null-ls.code_actions"
