@@ -21,7 +21,7 @@ lvim.builtin.nvimtree.setup.open_on_setup                   = true
 lvim.builtin.nvimtree.setup.open_on_tab                     = true
 lvim.builtin.nvimtree.setup.open_on_setup_file              = true
 lvim.builtin.nvimtree.setup.filters.dotfiles                = false
-lvim.builtin.nvimtree.setup.view.width                      = 40
+lvim.builtin.nvimtree.setup.view.width                      = 60
 lvim.builtin.nvimtree.setup.view.hide_root_folder           = false
 lvim.builtin.nvimtree.setup.sort_by                         = "case_sensitive"
 lvim.builtin.nvimtree.setup.view.auto_resize                = false
@@ -62,26 +62,14 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    command = "eslint",
+    command = "eslint_d",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-  },
-}
-
-local code_actions = require "lvim.lsp.null-ls.code_actions"
-code_actions.setup {
-  {
-    exe = "eslint_d",
-    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
   },
 }
 
 -- Additional Plugins
 lvim.plugins = {
   { "marko-cerovac/material.nvim" },
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
   {
     "wfxr/minimap.vim",
     run = "cargo install --locked code-minimap",
